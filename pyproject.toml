@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "nucleiparser"
+version = "0.1.0"
+authors = [
+  { name="Manuel Mancera", email="manu@unam.re" },
+]
+license =  {text = "GPL-3.0-or-later"}
+description = "A CLI parser for Nuclei outputs"
+keywords = ["nuclei", "pentesting", "nuclei parser"]
+readme = "README.md"
+requires-python = ">=3.6"
+dependencies = [
+  "prettytable"
+]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
+  "Operating System :: OS Independent",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/sinkmanu/nucleiparser"
+"Source" = "https://github.com/sinkmanu/nucleiparser"
+"Bug Tracker" = "https://github.com/sinkmanu/nucleiparser/issues"

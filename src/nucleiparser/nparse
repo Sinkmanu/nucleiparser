@@ -1,0 +1,50 @@
+#!/usr/bin/env python3
+
+from optparse import OptionParser,OptionGroup
+import sys
+from nucleiparser import NucleiJsonFile
+
+parser = OptionParser()
+parser.add_option("-f", "--file", dest="filename",
+                  help="FILE with json output. If no FILE, uses stdin", metavar="FILE")
+parser.add_option("-c", "--colums", dest="columns",
+                  help="Columns to print (e.g. template-id,url,info.severity)", metavar="COLUMNS", default="template-id,url,info.severity")
+parser.add_option("-s", "--sort-by", dest="sort",
+                  help="Sort by arg (e.g. info.severity)", metavar="SORT", default=None)
+parser.add_option("-P", "--pretty", action="store_true", dest="pretty",
+                  help="Pretty print (default)", default=True)
+parser.add_option("-C", "--csv", action="store_true", dest="csv",
+                  help="CSV print", default=False)
+group = OptionGroup(parser, "FILTER OPTIONS")
+group.add_option("--fs", "--filter-severity", dest="filter_severity", metavar="FILTER",
+                  help="Filter level of severity (unknown, info, low, medium, high, critical). Comma separated list for more than one", default=None)
+group.add_option("--ft", "--filter-template", dest="filter_template", metavar="FILTER",
+                  help="Filter by template-id. Comma separated list for more than one", default=None)
+group.add_option("--fu", "--filter-url", dest="filter_url", metavar="FILTER",
+                  help="Filter by url. Comma separated list for more than one", default=None)
+group.add_option("--fh", "--filter-host", dest="filter_host", metavar="FILTER",
+                  help="Filter by host. Comma separated list for more than one", default=None)
+parser.add_option_group(group)
+
+
+if __name__ == '__main__':
+    (options, args) = parser.parse_args()
+    data = NucleiJsonFile()
+    if options.filename == None:
+        data.loadsJson(sys.stdin.read())
+    else:
+        data.loadJson(options.filename)
+    # Filters
+    if (options.filter_severity != None):
+        data.filter('filter_severity', options.filter_severity)
+    if options.filter_template != None:
+        data.filter('filter_template', options.filter_template)
+    if options.filter_url != None:
+        data.filter('filter_url', options.filter_url)
+    if options.filter_host != None:
+        data.filter('filter_host', options.filter_host)
+    # Output format
+    if options.csv: 
+        data.printCsv(options.columns, sortby=options.sort)
+    else:
+        data.printPretty(options.columns, sortby=options.sort)
