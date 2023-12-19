@@ -119,13 +119,14 @@ class NucleiJsonFile:
 
 # Class to handle the Nuclei template 
 class NucleiTemplate:
-    def __init__(self, template, template_url, template_id, template_path, info, matcher_name=None, extractor_name=None, type=None, host=None, \
+    def __init__(self, template, template_url, template_id, template_path, template_encoded=None, info=None, matcher_name=None, extractor_name=None, type=None, host=None, \
                  port=None, scheme=None, url=None, path=None, matched_at=None, extracted_results=None, request=None, response=None, ip=None, \
                     meta=None, timestamp=None, curl_command=None, interaction=None, matcher_status=None):
         self.template = template
         self.template_url = template_url
         self.template_id = template_id
         self.template_path = template_path
+        self.template_encoded = template_encoded
         self.info = NucleiTemplateInfo(**info)
         self.matcher_name = matcher_name
         self.extractor_name = extractor_name
