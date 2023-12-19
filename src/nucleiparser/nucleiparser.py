@@ -121,7 +121,7 @@ class NucleiJsonFile:
 class NucleiTemplate:
     def __init__(self, template, template_url, template_id, template_path, template_encoded=None, info=None, matcher_name=None, extractor_name=None, type=None, host=None, \
                  port=None, scheme=None, url=None, path=None, matched_at=None, extracted_results=None, request=None, response=None, ip=None, \
-                    meta=None, timestamp=None, curl_command=None, interaction=None, matcher_status=None):
+                    meta=None, timestamp=None, curl_command=None, interaction=None, matcher_status=None, matched_line=None):
         self.template = template
         self.template_url = template_url
         self.template_id = template_id
@@ -146,16 +146,18 @@ class NucleiTemplate:
         self.curl_command = curl_command
         self.interaction = interaction
         self.matcher_status = matcher_status
+        self.matched_line = matched_line
 
     def __str__(self):
         return f"NucleiTemplate(template-id={self.template_id}, template-path={self.template_path}, info={self.info}, type={self.type}, host={self.host}, port={self.port}, scheme={self.scheme}, url={self.url}, marched_at={self.matched_at}, extracted_results={self.extracted_results}, request={repr(self.request)}, response={repr(self.response)}, ip={self.ip}, timestamp={self.timestamp}, curl_command={self.curl_command}, matcher_status={self.matcher_status} )"
 
 
 class NucleiTemplateInfo:
-    def __init__(self, description=None, reference=None, classification=None, name=None, author=None, tags=None, severity=None, metadata=None):
+    def __init__(self, description=None, reference=None, remediation=None, classification=None, name=None, author=None, tags=None, severity=None, metadata=None):
         self.description = description
         self.classification = classification
         self.reference = reference
+        self.remediation = remediation
         self.name = name
         self.author = author
         self.tags = tags
