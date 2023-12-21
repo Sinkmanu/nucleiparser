@@ -10,7 +10,7 @@ parser.add_option("-f", "--file", dest="filename",
 parser.add_option("-c", "--colums", dest="columns",
                   help="Columns to print (e.g. template-id,url,info.severity)", metavar="COLUMNS", default="template-id,url,info.severity")
 parser.add_option("-s", "--sort-by", dest="sort",
-                  help="Sort by arg (e.g. info.severity)", metavar="SORT", default=None)
+                  help="Sort by arg (e.g. template-id)", metavar="SORT", default="info.severity")
 parser.add_option("-P", "--pretty", action="store_true", dest="pretty",
                   help="Pretty print (default)", default=True)
 parser.add_option("-C", "--csv", action="store_true", dest="csv",

@@ -6,6 +6,15 @@ import csv
 import sys
 
 
+custom_sort_order = {
+    "unknown": 0,
+    "critical": 1,
+    "high": 2,
+    "medium": 3,
+    "low": 4,
+    "info": 5,
+}
+
 # Class to handle Nuclei Json file
 class NucleiJsonFile:
     def __init__(self):
@@ -50,7 +59,7 @@ class NucleiJsonFile:
         """
         table = PrettyTable()
         table.field_names = [column.strip() for column in columns.split(",")]
-        for entry in self.entries:
+        for entry in sorted(self.entries, key=lambda x: custom_sort_order.get(x.info.severity, float('inf'))):
             row = []
             for i in table.field_names:
                 if ("template" == i.strip()):
@@ -76,7 +85,8 @@ class NucleiJsonFile:
                 else:
                     row.append(i.strip())
             table.add_row(row)
-        table.sortby = sortby
+        if sortby != 'info.severity':
+            table.sortby = sortby
         print(table)
     
     def printCsv(self, items, sortby=None):
