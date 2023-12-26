@@ -163,7 +163,7 @@ class NucleiTemplate:
 
 
 class NucleiTemplateInfo:
-    def __init__(self, description=None, reference=None, remediation=None, classification=None, name=None, author=None, tags=None, severity=None, metadata=None):
+    def __init__(self, description=None, reference=None, remediation=None, impact=None, classification=None, name=None, author=None, tags=None, severity=None, metadata=None):
         self.description = description
         self.classification = classification
         self.reference = reference
@@ -171,6 +171,7 @@ class NucleiTemplateInfo:
         self.name = name
         self.author = author
         self.tags = tags
+        self.impact = impact
         self.severity = severity
         self.metadata = metadata
     
